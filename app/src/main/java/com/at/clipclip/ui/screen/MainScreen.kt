@@ -87,9 +87,9 @@ private fun MainContent(
                 Icon(
                     painter = painterResource(R.drawable.ic_fluent_arrow_upload_32_regular),
                     contentDescription = null,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(22.dp),
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = "上传",
                     style = MaterialTheme.typography.titleMedium,
@@ -102,9 +102,9 @@ private fun MainContent(
                 Icon(
                     painter = painterResource(R.drawable.ic_fluent_arrow_download_32_regular),
                     contentDescription = null,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(22.dp),
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = "下载",
                     style = MaterialTheme.typography.titleMedium,
