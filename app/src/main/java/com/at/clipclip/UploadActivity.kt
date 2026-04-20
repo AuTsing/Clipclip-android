@@ -26,6 +26,7 @@ class UploadActivity : ComponentActivity() {
     private val loadingState: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private val messageState: MutableStateFlow<String> = MutableStateFlow("")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,12 +41,23 @@ class UploadActivity : ComponentActivity() {
     }
 
     private fun handleUpload() = lifecycleScope.launch {
-        loadingState.value = true
-        messageState.value = "请求中"
-        delay(3000)
-        loadingState.value = false
-        messageState.value = "已上传 1 条内容"
-        delay(1000)
-        finishAndRemoveTask()
+        runCatching {
+            loadingState.value = true
+            messageState.value = "请求中"
+
+            val clip = "abc"
+            val addr = getAddr().getOrThrow()
+            val client = newHttpClient()
+            val message = clip.toUploadMessage()
+            client.upload(addr, message).getOrThrow()
+        }.onSuccess {
+            loadingState.value = false
+            messageState.value = "已上传 1 条内容"
+            delay(1000)
+            finishAndRemoveTask()
+        }.onFailure { e ->
+            loadingState.value = false
+            messageState.value = e.message ?: e.stackTraceToString()
+        }
     }
 }
