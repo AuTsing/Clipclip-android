@@ -13,11 +13,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MainScreen(
-                addr = "",
+                addr = "http://",
                 onAddrChange = {},
                 onClickUpload = {},
                 onClickDownload = {},
             )
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
     }
 }
