@@ -29,11 +29,11 @@ class MainActivity : ComponentActivity() {
         handleObserveAddr()
     }
 
-    fun handleLoadAddr() = lifecycleScope.launch {
+    private fun handleLoadAddr() = lifecycleScope.launch {
         getAddr().getOrNull()?.let { addrState.value = it }
     }
 
-    fun handleObserveAddr() = lifecycleScope.launch {
+    private fun handleObserveAddr() = lifecycleScope.launch {
         addrState.collect { setAddr(it).getOrNull() }
     }
 }
