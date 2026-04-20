@@ -21,8 +21,8 @@ class MainActivity : ComponentActivity() {
             MainScreen(
                 addr = addrState.collectAsState().value,
                 onAddrChange = { addrState.value = it },
-                onClickUpload = {},
-                onClickDownload = {},
+                onClickUpload = { UploadActivity.startActivity(this) },
+                onClickDownload = { DownloadActivity.startActivity(this) },
             )
         }
         handleLoadAddr()
