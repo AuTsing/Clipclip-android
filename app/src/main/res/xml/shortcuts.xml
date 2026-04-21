@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:icon="@drawable/ic_fluent_arrow_upload_32_regular"
+        android:shortcutId="upload"
+        android:shortcutLongLabel="@string/upload"
+        android:shortcutShortLabel="@string/upload">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.at.clipclip.UploadActivity"
+            android:targetPackage="com.at.clipclip" />
+    </shortcut>
+
+    <shortcut
+        android:icon="@drawable/ic_fluent_arrow_download_32_regular"
+        android:shortcutId="download"
+        android:shortcutLongLabel="@string/download"
+        android:shortcutShortLabel="@string/download">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.at.clipclip.DownloadActivity"
+            android:targetPackage="com.at.clipclip" />
+    </shortcut>
+
+</shortcuts>
