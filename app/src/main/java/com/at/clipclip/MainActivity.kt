@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
 
     private val addrState: MutableStateFlow<String> = MutableStateFlow("")
+    private val messageState: MutableStateFlow<String> = MutableStateFlow("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +22,28 @@ class MainActivity : ComponentActivity() {
         setContent {
             MainScreen(
                 addr = addrState.collectAsState().value,
+                message = messageState.collectAsState().value,
                 onAddrChange = { addrState.value = it },
+                onClickAddUploadShortcut = { handleAddUploadShortcut() },
+                onClickAddDownloadShortcut = { handleAddDownloadShortcut() },
                 onClickUpload = { UploadActivity.startActivity(this) },
                 onClickDownload = { DownloadActivity.startActivity(this) },
             )
         }
         handleLoadAddr()
         handleObserveAddr()
+    }
+
+    private fun handleAddUploadShortcut() = runCatching {
+        addUploadShortcut().getOrThrow()
+    }.onFailure { e ->
+        messageState.value = e.message ?: e.stackTraceToString()
+    }
+
+    private fun handleAddDownloadShortcut() = runCatching {
+        addDownloadShortcut().getOrThrow()
+    }.onFailure { e ->
+        messageState.value = e.message ?: e.stackTraceToString()
     }
 
     private fun handleLoadAddr() = lifecycleScope.launch {

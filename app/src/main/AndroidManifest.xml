@@ -24,11 +24,13 @@
 
         <activity
             android:name=".UploadActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleInstance" />
 
         <activity
             android:name=".DownloadActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:launchMode="singleInstance" />
 
     </application>
 </manifest>

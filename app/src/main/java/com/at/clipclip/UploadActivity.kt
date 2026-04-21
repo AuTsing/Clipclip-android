@@ -22,6 +22,12 @@ class UploadActivity : ComponentActivity() {
             val intent = Intent(context, UploadActivity::class.java)
             context.startActivity(intent)
         }
+
+        fun createIntent(context: Context): Intent {
+            val intent = Intent(context, UploadActivity::class.java)
+            intent.action = Intent.ACTION_MAIN
+            return intent
+        }
     }
 
     private val focused: CompletableDeferred<Unit> = CompletableDeferred()

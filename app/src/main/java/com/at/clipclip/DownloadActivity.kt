@@ -21,6 +21,12 @@ class DownloadActivity : ComponentActivity() {
             val intent = Intent(context, DownloadActivity::class.java)
             context.startActivity(intent)
         }
+
+        fun createIntent(context: Context): Intent {
+            val intent = Intent(context, DownloadActivity::class.java)
+            intent.action = Intent.ACTION_MAIN
+            return intent
+        }
     }
 
     private val loadingState: MutableStateFlow<Boolean> = MutableStateFlow(false)

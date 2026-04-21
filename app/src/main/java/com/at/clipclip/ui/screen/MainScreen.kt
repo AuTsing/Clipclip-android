@@ -25,7 +25,10 @@ import com.at.clipclip.ui.theme.ClipclipTheme
 @Composable
 fun MainScreen(
     addr: String,
+    message: String,
     onAddrChange: (String) -> Unit,
+    onClickAddUploadShortcut: () -> Unit,
+    onClickAddDownloadShortcut: () -> Unit,
     onClickUpload: () -> Unit,
     onClickDownload: () -> Unit,
 ) {
@@ -34,7 +37,10 @@ fun MainScreen(
             Surface(modifier = Modifier.padding(paddingValues)) {
                 MainContent(
                     addr,
+                    message,
                     onAddrChange,
+                    onClickAddUploadShortcut,
+                    onClickAddDownloadShortcut,
                     onClickUpload,
                     onClickDownload,
                 )
@@ -46,7 +52,10 @@ fun MainScreen(
 @Composable
 private fun MainContent(
     addr: String,
+    message: String,
     onAddrChange: (String) -> Unit,
+    onClickAddUploadShortcut: () -> Unit,
+    onClickAddDownloadShortcut: () -> Unit,
     onClickUpload: () -> Unit,
     onClickDownload: () -> Unit,
 ) {
@@ -71,6 +80,16 @@ private fun MainContent(
             modifier = Modifier.fillMaxWidth(),
         )
         PrimaryButton(
+            text = "添加上传桌面快捷方式",
+            iconId = R.drawable.ic_fluent_add_32_regular,
+            onClick = onClickAddUploadShortcut,
+        )
+        PrimaryButton(
+            text = "添加下载桌面快捷方式",
+            iconId = R.drawable.ic_fluent_add_32_regular,
+            onClick = onClickAddDownloadShortcut,
+        )
+        PrimaryButton(
             text = "上传",
             iconId = R.drawable.ic_fluent_arrow_upload_32_regular,
             onClick = onClickUpload,
@@ -80,6 +99,7 @@ private fun MainContent(
             iconId = R.drawable.ic_fluent_arrow_download_32_regular,
             onClick = onClickDownload,
         )
+        Text(message)
     }
 }
 
@@ -88,7 +108,10 @@ private fun MainContent(
 private fun MainScreenPreview() {
     MainScreen(
         addr = "http://192.168.6.1:8090",
+        message = "Here is some message",
         onAddrChange = {},
+        onClickAddUploadShortcut = {},
+        onClickAddDownloadShortcut = {},
         onClickUpload = {},
         onClickDownload = {},
     )
