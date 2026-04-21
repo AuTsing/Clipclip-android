@@ -3,7 +3,7 @@
 
     <shortcut
         android:icon="@drawable/ic_fluent_arrow_upload_32_regular"
-        android:shortcutId="upload"
+        android:shortcutId="launcher_menu_upload"
         android:shortcutLongLabel="@string/upload"
         android:shortcutShortLabel="@string/upload">
         <intent
@@ -14,7 +14,7 @@
 
     <shortcut
         android:icon="@drawable/ic_fluent_arrow_download_32_regular"
-        android:shortcutId="download"
+        android:shortcutId="launcher_menu_download"
         android:shortcutLongLabel="@string/download"
         android:shortcutShortLabel="@string/download">
         <intent

@@ -12,7 +12,7 @@ fun Context.addUploadShortcut(): Result<Unit> = runCatching {
     if (!service.isRequestPinShortcutSupported) {
         throw Exception("Not support to request pin shortcut")
     }
-    val shortcut = ShortcutInfo.Builder(this, "upload")
+    val shortcut = ShortcutInfo.Builder(this, "launcher_upload")
         .setShortLabel(getString(R.string.upload))
         .setLongLabel(getString(R.string.upload))
         .setIcon(Icon.createWithResource(this, R.mipmap.ic_upload_launcher))
@@ -27,7 +27,7 @@ fun Context.addDownloadShortcut(): Result<Unit> = runCatching {
     if (!service.isRequestPinShortcutSupported) {
         throw Exception("Not support to request pin shortcut")
     }
-    val shortcut = ShortcutInfo.Builder(this, "download")
+    val shortcut = ShortcutInfo.Builder(this, "launcher_download")
         .setShortLabel(getString(R.string.download))
         .setLongLabel(getString(R.string.download))
         .setIcon(Icon.createWithResource(this, R.mipmap.ic_download_launcher))
