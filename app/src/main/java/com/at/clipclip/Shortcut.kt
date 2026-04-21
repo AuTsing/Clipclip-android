@@ -13,8 +13,8 @@ fun Context.addUploadShortcut(): Result<Unit> = runCatching {
         throw Exception("Not support to request pin shortcut")
     }
     val shortcut = ShortcutInfo.Builder(this, "upload")
-        .setShortLabel("上传")
-        .setLongLabel("上传剪贴板")
+        .setShortLabel(getString(R.string.upload))
+        .setLongLabel(getString(R.string.upload))
         .setIcon(Icon.createWithResource(this, R.mipmap.ic_upload_launcher))
         .setIntent(UploadActivity.createIntent(this))
         .build()
@@ -28,8 +28,8 @@ fun Context.addDownloadShortcut(): Result<Unit> = runCatching {
         throw Exception("Not support to request pin shortcut")
     }
     val shortcut = ShortcutInfo.Builder(this, "download")
-        .setShortLabel("下载")
-        .setLongLabel("下载剪贴板")
+        .setShortLabel(getString(R.string.download))
+        .setLongLabel(getString(R.string.download))
         .setIcon(Icon.createWithResource(this, R.mipmap.ic_download_launcher))
         .setIntent(DownloadActivity.createIntent(this))
         .build()
