@@ -71,3 +71,19 @@ suspend fun HttpClient.upload(
         throw Exception(uploadResult.message)
     }
 }
+
+suspend fun HttpClient.download(
+    addr: String,
+    message: RequestMessage.Download,
+): Result<String> = runCatching {
+    val resp = post(addr) {
+        url { appendPathSegments("download") }
+        contentType(ContentType.Application.Json)
+        setBody(message)
+    }
+    val downloadResult = resp.body<ResponseMessage.DownloadResult>()
+    if (!downloadResult.success) {
+        throw Exception(downloadResult.message)
+    }
+    return@runCatching downloadResult.clip
+}

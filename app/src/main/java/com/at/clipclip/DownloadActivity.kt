@@ -3,6 +3,7 @@ package com.at.clipclip
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -40,12 +41,23 @@ class DownloadActivity : ComponentActivity() {
     }
 
     private fun handleDownload() = lifecycleScope.launch {
-        loadingState.value = true
-        messageState.value = "请求中"
-        delay(3000)
-        loadingState.value = false
-        messageState.value = "已下载 1 条内容"
-        delay(1000)
-        finishAndRemoveTask()
+        runCatching {
+            loadingState.value = true
+            messageState.value = "请求中"
+
+            val addr = getAddr().getOrThrow()
+            val client = newHttpClient()
+            val message = RequestMessage.Download
+            val clip = client.download(addr, message).getOrThrow()
+            Log.d("TAG", "handleDownload: $clip")
+        }.onSuccess {
+            loadingState.value = false
+            messageState.value = "已下载 1 条内容"
+            delay(1000)
+            finishAndRemoveTask()
+        }.onFailure { e ->
+            loadingState.value = false
+            messageState.value = e.message ?: e.stackTraceToString()
+        }
     }
 }
