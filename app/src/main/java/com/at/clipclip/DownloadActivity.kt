@@ -3,7 +3,6 @@ package com.at.clipclip
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -49,7 +48,7 @@ class DownloadActivity : ComponentActivity() {
             val client = newHttpClient()
             val message = RequestMessage.Download
             val clip = client.download(addr, message).getOrThrow()
-            Log.d("TAG", "handleDownload: $clip")
+            setClip(clip).getOrThrow()
         }.onSuccess {
             loadingState.value = false
             messageState.value = "已下载 1 条内容"

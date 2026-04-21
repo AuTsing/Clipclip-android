@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.lifecycleScope
 import com.at.clipclip.ui.screen.ActionScreen
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -23,9 +24,9 @@ class UploadActivity : ComponentActivity() {
         }
     }
 
+    private val focused: CompletableDeferred<Unit> = CompletableDeferred()
     private val loadingState: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private val messageState: MutableStateFlow<String> = MutableStateFlow("")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +41,20 @@ class UploadActivity : ComponentActivity() {
         handleUpload()
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            focused.complete(Unit)
+        }
+    }
+
     private fun handleUpload() = lifecycleScope.launch {
         runCatching {
             loadingState.value = true
             messageState.value = "请求中"
 
-            val clip = "abc"
+            focused.await()
+            val clip = getClip().getOrThrow()
             val addr = getAddr().getOrThrow()
             val client = newHttpClient()
             val message = clip.toUploadMessage()
