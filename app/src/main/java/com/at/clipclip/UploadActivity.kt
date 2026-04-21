@@ -1,5 +1,6 @@
 package com.at.clipclip
 
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -20,13 +21,26 @@ class UploadActivity : ComponentActivity() {
 
         fun startActivity(context: Context) {
             val intent = Intent(context, UploadActivity::class.java)
+            intent.flags += Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(intent)
         }
 
         fun createIntent(context: Context): Intent {
             val intent = Intent(context, UploadActivity::class.java)
             intent.action = Intent.ACTION_MAIN
+            intent.flags += Intent.FLAG_ACTIVITY_NEW_TASK
             return intent
+        }
+
+        fun createPendingIntent(context: Context): PendingIntent {
+            val intent = createIntent(context)
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE,
+            )
+            return pendingIntent
         }
     }
 
