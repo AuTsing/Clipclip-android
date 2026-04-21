@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.lifecycleScope
 import com.at.clipclip.ui.screen.MainScreen
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -34,6 +35,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun handleObserveAddr() = lifecycleScope.launch {
-        addrState.collect { setAddr(it).getOrNull() }
+        addrState.drop(1).collect { setAddr(it).getOrNull() }
     }
 }
